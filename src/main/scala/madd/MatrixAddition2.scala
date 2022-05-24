@@ -65,7 +65,7 @@ object MatrixAddition2 extends App {
   (new ChiselStage).execute(
     Array("-X", "verilog", "-td", "source/"),
     Seq(
-      ChiselGeneratorAnnotation(() => new MatrixAddition2(3, 2))
+      ChiselGeneratorAnnotation(() => new MatrixAddition2(30, 20))
     )
   )
 }
