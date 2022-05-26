@@ -3,32 +3,29 @@ package madd
 import chisel3._
 import chisel3.iotesters.PeekPokeTester
 import chisel3.util._
+import scala.language.experimental
 
 // poke: input data to module
 // peek: get module output data
 // expect: compare data
 
 class MatrixMul1Tester(dut: MatrixMul1) extends PeekPokeTester(dut) {
+
+  var matA = Array(0, 1, 2, 3, 4, 5)
+  var matB = Array(0, 1, 2, 3, 4, 5, 6, 7)
+  var matAns = Array(4, 5, 6, 7, 12, 17, 22, 27, 20, 29, 38, 47)
+
   for (i <- 0 until 3 * 2) {
-    poke(dut.io.a(i), i)
+    poke(dut.io.a(i), matA(i))
   }
 
   for (i <- 0 until 2 * 4) {
-    poke(dut.io.b(i), i)
+    poke(dut.io.b(i), matB(i))
   }
 
-  expect(dut.io.out(0), 4)
-  expect(dut.io.out(1), 5)
-  expect(dut.io.out(2), 6)
-  expect(dut.io.out(3), 7)
-  expect(dut.io.out(4), 12)
-  expect(dut.io.out(5), 17)
-  expect(dut.io.out(6), 22)
-  expect(dut.io.out(7), 27)
-  expect(dut.io.out(8), 20)
-  expect(dut.io.out(9), 29)
-  expect(dut.io.out(10), 38)
-  expect(dut.io.out(11), 47)
+  for (i <- 0 until 3 * 4) {
+    expect(dut.io.out(i), matAns(i))
+  }
 
 }
 
