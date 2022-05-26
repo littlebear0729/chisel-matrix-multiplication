@@ -4,11 +4,12 @@ import chisel3._
 import chisel3.util._
 import chisel3.stage.{ChiselStage, ChiselGeneratorAnnotation}
 
-class MatrixAddition2(M: Int, N: Int)
-    extends Module
-    with CurrentCycle {
+class MatrixAddition2(M: Int, N: Int) extends Module with CurrentCycle {
   val io = IO(new MatrixAddition2IO(M, N))
 
+  // input's ready -> false.B
+  // output's bits -> DontCare
+  // output's valid -> false.B
   io.in.ready := false.B
 
   io.out.bits := DontCare
@@ -25,6 +26,9 @@ class MatrixAddition2(M: Int, N: Int)
   val i = Counter(M)
   val j = Counter(N)
 
+  chisel3.printf(
+    p"$regA $regB $regOut\n"
+  )
   switch(state) {
     is(sLoad) {
       io.in.ready := true.B

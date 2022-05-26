@@ -4,6 +4,10 @@ import chisel3._
 import chisel3.iotesters.PeekPokeTester
 import chisel3.util._
 
+// poke: input data to module
+// peek: get module output data
+// expect: compare data
+
 class MatrixMul1Tester(dut: MatrixMul1) extends PeekPokeTester(dut) {
   for (i <- 0 until 3 * 2) {
     poke(dut.io.a(i), i)
