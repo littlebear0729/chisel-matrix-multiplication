@@ -53,10 +53,7 @@ class MatrixMul2(M: Int, N: Int, P: Int) extends Module with CurrentCycle {
       
       state := sLoad
       // chisel3.printf(p"computed: $regA * $regB = $sum, regOut: $regOut\n")
-      // var ii = i.value
-      // var jj = j.value
-      // var kk = k.value
-      // chisel3.printf(p"i: $ii, j: $jj, k: $kk\n")
+      // chisel3.printf(p"i: ${i.value}, j: ${j.value}, k: ${k.value}\n")
 
       when(k.inc()) {
         when(j.inc()) {
